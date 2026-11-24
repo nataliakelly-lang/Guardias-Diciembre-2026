@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Guardias Koltin — Diciembre 2026</title>
+<style>
+:root{--vop:#203D2D;--tvd:#237A4A;--voc:#0F2913;--lima:#A6EF34;--gris:#E5E5E5;--beige:#F7F6F0;--blanco:#FFFFFF;--negro:#111111;--r:6px;--sh:0 2px 10px rgba(15,41,19,.13);}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:14px;background:var(--beige)}
+body{font-family:'Inter','Helvetica Neue',Arial,sans-serif;color:var(--negro)}
+#topbar{background:var(--voc);color:var(--lima);padding:12px 22px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;box-shadow:var(--sh);gap:10px;flex-wrap:wrap}
+#topbar h1{font-size:1.05rem;font-weight:700;letter-spacing:.03em}
+#topbar .sub{font-size:.74rem;color:rgba(166,239,52,.6);margin-top:1px}
+.tbtn{border:none;border-radius:var(--r);padding:6px 14px;font-size:.78rem;font-weight:700;cursor:pointer;font-family:inherit;transition:.15s}
+#print-btn{background:var(--lima);color:var(--voc)}
+#edit-btn{background:rgba(166,239,52,.2);color:var(--lima);border:1px solid rgba(166,239,52,.4)}
+#edit-btn.on{background:var(--lima);color:var(--voc)}
+#reset-btn{background:rgba(255,80,60,.15);color:#ff6450;border:1px solid rgba(255,80,60,.3);display:none}
+#tabs{display:flex;gap:4px;padding:12px 18px 0;overflow-x:auto;background:var(--beige);border-bottom:2px solid var(--gris);position:sticky;top:49px;z-index:90}
+.tab{padding:7px 15px;border-radius:var(--r) var(--r) 0 0;border:none;background:var(--gris);color:var(--vop);font-size:.8rem;font-weight:600;cursor:pointer;white-space:nowrap;font-family:inherit;transition:.15s}
+.tab.active,.tab:hover{background:var(--tvd);color:var(--lima)}
+#main{max-width:1280px;margin:0 auto;padding:18px 14px 60px}
+.info-bar{background:var(--voc);color:var(--blanco);border-radius:var(--r);padding:14px 20px;margin-bottom:18px;display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px}
+.info-bar h2{grid-column:1/-1;font-size:.8rem;color:var(--lima);text-transform:uppercase;letter-spacing:.08em;margin-bottom:2px}
+.info-item{font-size:.77rem;line-height:1.6;color:rgba(255,255,255,.82)}
+.info-item strong{display:block;color:var(--lima);font-size:.67rem;text-transform:uppercase;letter-spacing:.06em;margin-bottom:1px}
+.wk-panel{display:none}.wk-panel.active{display:block}
+.wk-label{background:var(--tvd);color:var(--lima);padding:8px 16px;font-size:.82rem;font-weight:700;border-radius:var(--r);margin-bottom:12px;letter-spacing:.03em}
+.card{background:var(--blanco);border-radius:var(--r);box-shadow:var(--sh);margin-bottom:14px;overflow:hidden}
+.chdr{padding:9px 14px;font-size:.8rem;font-weight:700;letter-spacing:.04em;color:var(--blanco)}
+.chdr.lima{color:var(--lima)}
+.sub-row{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));margin-top:12px}
+table{width:100%;border-collapse:collapse;table-layout:fixed}
+th{padding:7px 8px;font-size:.73rem;font-weight:700;text-align:center;border-right:1px solid rgba(255,255,255,.2);color:var(--blanco)}
+th:last-child{border-right:none}
+td{padding:5px 7px;font-size:.77rem;vertical-align:top;border-right:1px solid var(--gris);border-bottom:1px solid var(--gris);color:var(--voc);line-height:1.5}
+td:last-child{border-right:none}
+tr:last-child td{border-bottom:none}
+.ra{background:var(--beige)}.rb{background:var(--blanco)}
+.sh{background:var(--lima)!important;color:var(--voc)!important}
+.sd{background:#f0fcd8}
+.sd b{color:var(--voc)}
+.sl{background:#dff5b0;font-weight:700;font-size:.7rem;text-transform:uppercase;letter-spacing:.04em;color:var(--vop)}
+.off{background:#E3F2FD;color:#0D47A1;font-weight:600;font-size:.74rem;text-align:center}
+.offh{background:#1976D2!important}
+body.edit td[data-k]{cursor:pointer}
+body.edit td[data-k]:hover{background:#e6ffc2!important;outline:2px solid var(--lima);outline-offset:-1px}
+td.mod{border-left:3px solid var(--lima)!important}
+td input.ei{width:100%;border:none;outline:none;background:transparent;font-size:.77rem;font-family:inherit;color:var(--voc);padding:0;min-width:60px}
+.cg{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));padding:0 14px 40px;max-width:1280px;margin:0 auto}
+.cc{background:var(--blanco);border-radius:var(--r);box-shadow:var(--sh);overflow:hidden}
+.cch{padding:8px 14px;font-size:.8rem;font-weight:700;color:var(--blanco)}
+.cr{display:flex;justify-content:space-between;padding:5px 14px;font-size:.78rem}
+.cr:nth-child(odd){background:var(--beige)}
+.cd{font-weight:700;color:var(--tvd)}
+.btabs{display:flex;gap:6px;padding:16px 14px 0;max-width:1280px;margin:0 auto}
+.bt{padding:6px 16px;border-radius:var(--r) var(--r) 0 0;border:none;background:var(--gris);color:var(--vop);font-size:.8rem;font-weight:600;cursor:pointer;font-family:inherit;transition:.15s}
+.bt.active,.bt:hover{background:var(--voc);color:var(--lima)}
+#cw{display:none}
+@media print{#topbar,#tabs,.btabs{display:none!important}.wk-panel{display:block!important}.card{break-inside:avoid;box-shadow:none}}
+</style>
+</head>
+<body>
+<div id="topbar">
+  <div>
+    <h1>🌿 KOLTIN — GUARDIAS DICIEMBRE 2026</h1>
+    <div class="sub">CDMX 12/día · SF 1/día · GDL 3/día · Sábados: 7 foráneos + QRO</div>
+  </div>
+  <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap">
+    <button id="edit-btn" class="tbtn" onclick="toggleEdit()">✏️ Editar</button>
+    <button id="reset-btn" class="tbtn" onclick="resetAll()">↺ Restablecer</button>
+    <button id="print-btn" class="tbtn" onclick="window.print()">🖨 Imprimir</button>
+  </div>
+</div>
+<div id="tabs"></div>
+<div id="main">
+  <div class="info-bar">
+    <h2>📋 Información general</h2>
+    <div class="info-item"><strong>Horario</strong>9:00 AM – 6:00 PM · 1 hr comida</div>
+    <div class="info-item"><strong>Eventualidades</strong>Cualquier eventualidad avisar a Nat o Lau</div>
+    <div class="info-item"><strong>Sin guardia</strong>Bloquear calendario como HO 9–6 PM</div>
+    <div class="info-item"><strong>Sin guardias</strong>9, 10 y 11 dic (KOTY) · 25 dic festivo</div>
+    <div class="info-item"><strong>Sábados</strong>La primera persona (negritas) es el TL/PL foráneo responsable</div>
+  </div>
+  <div id="weeks"></div>
+</div>
+<div class="btabs">
+  <button class="bt active" onclick="showSec('main',this)">📅 Semanas</button>
+  <button class="bt" onclick="showSec('cw',this)">📊 Conteo</button>
+</div>
+<div id="cw"><div class="cg" id="cg"></div></div>
+
+<script>
+const DATA={"1": {"CDMX": ["Cecilia Velarde", "Carlos Soria", "Diego Martínez", "Andrea Morales", "Yehoshuah Padilla", "Giovanni Aranda", "Aylin Tafoya", "Pedro Calderón", "Francisco Garcia", "Salvador Solis", "Fran Hernández", "Daniel Bojórquez"], "GDL": ["Osmar González", "Victor Muñoz", "Enrique Melchor"], "SF": ["Andrea Corralejo"]}, "2": {"CDMX": ["Diego Oseguera", "Eduardo Martínez", "Maricruz Medrano", "Jorge Viñas", "Roberto Ruiz", "Edgar Torres", "Jennie Jiménez", "Adela Burgueño", "Frida Cruz", "Alondra Gómez", "Lisette Garcia", "Pablo Serrano"], "GDL": ["América Sánchez", "Celina López", "Moisés Lara"], "SF": ["Edgar Hernández"]}, "3": {"CDMX": ["Edgar Tepexicuapa", "Rodrigo Reyes", "Ivonne Hernández", "Karla Pérez", "Alberto Rosales", "Anahí Cruz", "Gabriela Ávila", "Carlos Morales", "Andrea Morales", "Pedro Calderón", "Daniel Bojórquez", "Diego Martínez"], "GDL": ["Giovanni Corona", "Victor Muñoz", "Enrique Melchor"], "SF": ["Eduardo Flores"]}, "4": {"CDMX": ["Paulina Esquivel", "Julio Merino", "Lisette Garcia", "Shanty Echeverria", "Yasmín Ramírez", "Tanya Félix", "Aranza Álvarez", "Pablo Serrano", "Mitzy Cruz", "Uriel Solano", "Adela Burgueño", "Maricruz Medrano"], "GDL": ["América Sánchez", "Celina López", "Giovanni Corona"], "SF": ["Jacqueline Benitez"]}, "5": {"SAT": ["Sandra Anacoreta", "Andrés Martínez", "Sergio Jiménez", "Anna Paula Rosas", "Gustavo Sánchez", "Anahí Cruces", "Edgar Quini"], "SATCDMX": ["Cecilia Velarde"]}, "7": {"CDMX": ["Cecilia Velarde", "Diego Oseguera", "Fran Hernández", "Daniel Bojórquez", "Carlos Soria", "Diego Martínez", "Andrea Morales", "Yehoshuah Padilla", "Giovanni Aranda", "Aylin Tafoya", "Mitzy Cruz", "Adela Burgueño"], "GDL": ["Osmar González", "Moisés Lara", "Victor Muñoz"], "SF": ["Susana Esqueda"]}, "8": {"CDMX": ["Edgar Tepexicuapa", "Pedro Calderón", "Francisco Garcia", "Salvador Solis", "Eduardo Martínez", "Jorge Viñas", "Roberto Ruiz", "Edgar Torres", "Jennie Jiménez", "Uriel Solano", "Shanty Echeverria", "Anahí Cruz"], "GDL": ["Enrique Melchor", "América Sánchez", "Celina López"], "SF": ["Edgar Hernández"]}, "12": {"SAT": ["Mayra Matias", "Aketzalli Vidaurri", "Areli Sánchez", "Katya Conde", "Arvin Morales", "Belen Botello"], "SATCDMX": ["Diego Oseguera"]}, "14": {"CDMX": ["Cecilia Velarde", "Adela Burgueño", "Frida Cruz", "Alondra Gómez", "Rodrigo Reyes", "Ivonne Hernández", "Karla Pérez", "Alberto Rosales", "Maricruz Medrano", "Aranza Álvarez", "Edgar Torres", "Roberto Ruiz"], "GDL": ["Giovanni Corona", "Osmar González", "Moisés Lara"], "SF": ["Andrea Corralejo"]}, "15": {"CDMX": ["Diego Oseguera", "Anahí Cruz", "Gabriela Ávila", "Carlos Morales", "Paulina Esquivel", "Julio Merino", "Lisette Garcia", "Shanty Echeverria", "Yasmín Ramírez", "Tanya Félix", "Salvador Solis", "Aylin Tafoya"], "GDL": ["Victor Muñoz", "Enrique Melchor", "América Sánchez"], "SF": ["Susana Esqueda"]}, "16": {"CDMX": ["Aranza Álvarez", "Pablo Serrano", "Mitzy Cruz", "Uriel Solano", "Fran Hernández", "Daniel Bojórquez", "Carlos Soria", "Diego Martínez", "Andrea Morales", "Yehoshuah Padilla", "Maricruz Medrano", "Jennie Jiménez"], "GDL": ["Celina López", "Osmar González", "Moisés Lara"], "SF": ["Jacqueline Benitez"]}, "17": {"CDMX": ["Edgar Tepexicuapa", "Giovanni Aranda", "Aylin Tafoya", "Pedro Calderón", "Francisco Garcia", "Salvador Solis", "Eduardo Martínez", "Jorge Viñas", "Roberto Ruiz", "Paulina Esquivel", "Yasmín Ramírez", "Tanya Félix"], "GDL": ["Giovanni Corona", "Victor Muñoz", "Enrique Melchor"], "SF": ["Edgar Hernández"]}, "18": {"CDMX": ["Edgar Torres", "Jennie Jiménez", "Adela Burgueño", "Frida Cruz", "Alondra Gómez", "Rodrigo Reyes", "Ivonne Hernández", "Karla Pérez", "Alberto Rosales", "Gabriela Ávila", "Carlos Morales", "Julio Merino"], "GDL": ["América Sánchez", "Osmar González", "Celina López"], "SF": ["Susana Esqueda"]}, "19": {"SAT": ["Hugo Aranda", "Anel Navarrete", "Brandon Tome", "Tatiana Laredo", "Marla Corzo", "Angélica Hernández", "Jaime Vega"], "SATCDMX": ["Edgar Tepexicuapa"]}, "21": {"CDMX": ["Paulina Esquivel", "Anahí Cruz", "Gabriela Ávila", "Carlos Morales", "Julio Merino", "Lisette Garcia", "Shanty Echeverria", "Yasmín Ramírez", "Tanya Félix", "Ivonne Hernández", "Giovanni Aranda", "Francisco Garcia"], "GDL": ["Moisés Lara", "Giovanni Corona", "Victor Muñoz"], "SF": ["Eduardo Flores"]}, "22": {"CDMX": ["Diego Oseguera", "Aranza Álvarez", "Pablo Serrano", "Mitzy Cruz", "Uriel Solano", "Fran Hernández", "Daniel Bojórquez", "Carlos Soria", "Diego Martínez", "Andrea Morales", "Alberto Rosales", "Rodrigo Reyes"], "GDL": ["Enrique Melchor", "Osmar González", "América Sánchez"], "SF": ["Andrea Corralejo"]}, "23": {"CDMX": ["Edgar Tepexicuapa", "Yehoshuah Padilla", "Giovanni Aranda", "Aylin Tafoya", "Pedro Calderón", "Francisco Garcia", "Salvador Solis", "Eduardo Martínez", "Maricruz Medrano", "Jorge Viñas", "Julio Merino", "Anahí Cruz"], "GDL": ["Celina López", "Moisés Lara", "Giovanni Corona"], "SF": ["Jacqueline Benitez"]}, "24": {"CDMX": ["Cecilia Velarde", "Roberto Ruiz", "Edgar Torres", "Jennie Jiménez", "Frida Cruz", "Alondra Gómez", "Rodrigo Reyes", "Ivonne Hernández", "Karla Pérez", "Alberto Rosales", "Lisette Garcia", "Carlos Soria"], "GDL": ["Victor Muñoz", "Osmar González", "Enrique Melchor"], "SF": ["Eduardo Flores"]}, "26": {"SAT": ["Rosa Garcia", "Alejandra Lugo", "Maria del Carmen Ramirez", "Brenda González", "Daniela Rojas", "Paola Marquez", "Andrés Martínez", "Andrea Pineda"]}, "28": {"CDMX": ["Cecilia Velarde", "Paulina Esquivel", "Anahí Cruz", "Gabriela Ávila", "Carlos Morales", "Julio Merino", "Lisette Garcia", "Shanty Echeverria", "Alondra Gómez", "Jorge Viñas", "Yehoshuah Padilla", "Eduardo Martínez"], "GDL": ["América Sánchez", "Celina López", "Moisés Lara"], "SF": ["Edgar Hernández"]}, "29": {"CDMX": ["Diego Oseguera", "Yasmín Ramírez", "Tanya Félix", "Aranza Álvarez", "Pablo Serrano", "Mitzy Cruz", "Uriel Solano", "Fran Hernández", "Daniel Bojórquez", "Carlos Soria", "Frida Cruz", "Karla Pérez"], "GDL": ["Giovanni Corona", "Osmar González", "Victor Muñoz"], "SF": ["Susana Esqueda"]}, "30": {"CDMX": ["Edgar Tepexicuapa", "Diego Martínez", "Yehoshuah Padilla", "Giovanni Aranda", "Aylin Tafoya", "Pedro Calderón", "Francisco Garcia", "Salvador Solis", "Eduardo Martínez", "Maricruz Medrano", "Shanty Echeverria", "Paulina Esquivel"], "GDL": ["Enrique Melchor", "América Sánchez", "Celina López"], "SF": ["Eduardo Flores"]}, "31": {"CDMX": ["Jorge Viñas", "Roberto Ruiz", "Edgar Torres", "Jennie Jiménez", "Frida Cruz", "Alondra Gómez", "Rodrigo Reyes", "Ivonne Hernández", "Karla Pérez", "Alberto Rosales", "Gabriela Ávila", "Fran Hernández"], "GDL": ["Moisés Lara", "Giovanni Corona", "Osmar González"], "SF": ["Andrea Corralejo"]}};
+const MES_N="Diciembre", AÑO=2026;
+const OFF={9:"KOTY · sin guardias",10:"KOTY · sin guardias",11:"KOTY · sin guardias",25:"Festivo · sin guardias"};
+const DL=["DOM","LUN","MAR","MIÉ","JUE","VIE","SÁB"];
+const WEEKS=[
+  {days:[1,2,3,4],sat:5},
+  {days:[7,8,9,10,11],sat:12},
+  {days:[14,15,16,17,18],sat:19},
+  {days:[21,22,23,24,25],sat:26},
+  {days:[28,29,30,31],sat:null}
+].map((w,i)=>({...w,label:`Semana ${i+1}: ${w.days[0]}–${w.days[w.days.length-1]} Dic`}));
+const lbl=d=>DL[new Date(AÑO,11,d).getDay()];
+
+// Persistencia de ediciones
+const LS="koltin_dic2026";
+let edits={};
+try{edits=JSON.parse(localStorage.getItem(LS)||"{}");}catch(e){}
+function saveEdits(){try{localStorage.setItem(LS,JSON.stringify(edits));}catch(e){}}
+let editMode=false;
+function toggleEdit(){editMode=!editMode;document.body.classList.toggle("edit",editMode);const b=document.getElementById("edit-btn");b.textContent=editMode?"✅ Listo":"✏️ Editar";b.classList.toggle("on",editMode);document.getElementById("reset-btn").style.display=editMode?"inline-block":"none";}
+function cellClick(td){
+  if(!editMode||td.querySelector("input"))return;
+  const orig=td.textContent.trim();td.dataset.prev=orig;
+  const inp=document.createElement("input");inp.className="ei";inp.value=orig;
+  td.textContent="";td.appendChild(inp);inp.focus();inp.select();
+  function commit(){const v=inp.value.trim();td.textContent=v;
+    if(v!==td.dataset.orig){edits[td.dataset.k]=v;td.classList.add("mod");}
+    else{delete edits[td.dataset.k];td.classList.remove("mod");}
+    saveEdits();}
+  inp.addEventListener("blur",commit);
+  inp.addEventListener("keydown",e=>{if(e.key==="Enter")inp.blur();if(e.key==="Escape"){inp.value=td.dataset.prev;inp.blur();}});
+}
+function resetAll(){if(!confirm("¿Restablecer todos los cambios al calendario original?"))return;edits={};saveEdits();location.reload();}
+
+function cell(key,orig,cls,bold){
+  const v=edits[key]!==undefined?edits[key]:orig;
+  const mod=edits[key]!==undefined?" mod":"";
+  const inner=(bold&&edits[key]===undefined&&v)?`<b>${v}</b>`:v;
+  return `<td class="${cls}${mod}" data-k="${key}" data-orig="${orig}" onclick="cellClick(this)">${inner}</td>`;
+}
+function offCell(d,rows){return `<td class="off" rowspan="${rows}">${OFF[d]}</td>`;}
+
+function table(days,bg,sec,rows,extraSat){
+  let t=`<table><thead><tr>`;
+  days.forEach(d=>{t+=`<th class="${OFF[d]?'offh':''}" style="${OFF[d]?'':'background:'+bg}">${lbl(d)} ${d}</th>`;});
+  if(extraSat)t+=`<th class="sh">SÁB ${extraSat}</th>`;
+  t+=`</tr></thead><tbody>`;
+  for(let i=0;i<rows;i++){
+    t+=`<tr>`;
+    days.forEach(d=>{
+      if(OFF[d]){ if(i===0)t+=offCell(d,rows); return; }
+      t+=cell(`${sec}_${d}_${i}`,((DATA[d]||{})[sec]||[])[i]||"",i%2===0?"ra":"rb");
+    });
+    if(extraSat){
+      const s=DATA[extraSat]||{};const f=s.SAT||[];const c=s.SATCDMX||[];
+      if(i<f.length)t+=cell(`sat_${extraSat}_${i}`,f[i],"sd",i===0);
+      else if(c.length&&i===f.length)t+=`<td class="sl">🏙 Refuerzo CDMX</td>`;
+      else if(c.length&&i===f.length+1)t+=cell(`satc_${extraSat}_0`,c[0],"sd",false);
+      else t+=`<td class="sd"></td>`;
+    }
+    t+=`</tr>`;
+  }
+  return t+`</tbody></table>`;
+}
+
+function renderWeek(w){
+  const days=w.days;
+  const cRows=Math.max(12,w.sat?(((DATA[w.sat]||{}).SAT||[]).length+2):0);
+  const gRows=Math.max(...days.map(d=>((DATA[d]||{}).GDL||[]).length),1);
+  let html=`<div class="wk-label">📅 ${w.label}</div>`;
+  html+=`<div class="card"><div class="chdr lima" style="background:#203D2D">🏙️ GUARDIAS CDMX — ${MES_N} ${AÑO}${w.sat?' · Sábado: Foráneos + QRO':''}</div>${table(days,'#203D2D','CDMX',cRows,w.sat)}</div>`;
+  html+=`<div class="sub-row">`;
+  html+=`<div class="card"><div class="chdr" style="background:#237A4A">🏬 SANTA FE</div>${table(days,'#237A4A','SF',1)}</div>`;
+  html+=`<div class="card"><div class="chdr lima" style="background:#0F2913">🌇 GUARDIAS GDL</div>${table(days,'#237A4A','GDL',gRows)}</div>`;
+  html+=`</div>`;
+  return html;
+}
+
+function init(){
+  const tabsEl=document.getElementById("tabs"),weeksEl=document.getElementById("weeks");
+  WEEKS.forEach((w,wi)=>{
+    const b=document.createElement("button");b.className="tab"+(wi===0?" active":"");b.textContent=w.label;
+    b.onclick=()=>{document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));document.querySelectorAll(".wk-panel").forEach(x=>x.classList.remove("active"));b.classList.add("active");document.getElementById("wp"+wi).classList.add("active");};
+    tabsEl.appendChild(b);
+    const div=document.createElement("div");div.id="wp"+wi;div.className="wk-panel"+(wi===0?" active":"");div.innerHTML=renderWeek(w);weeksEl.appendChild(div);
+  });
+  // Conteo (sobre el calendario original)
+  const cnt={CDMX:{},GDL:{},SF:{},SAT:{}};
+  Object.values(DATA).forEach(v=>{
+    ["CDMX","GDL","SF","SAT"].forEach(k=>(v[k]||[]).forEach(p=>{cnt[k][p]=(cnt[k][p]||0)+1;}));
+    (v.SATCDMX||[]).forEach(p=>{cnt.SAT[p]=(cnt.SAT[p]||0)+1;});
+  });
+  const cg=document.getElementById("cg");
+  [["🏙 CDMX (entre semana)","#203D2D",cnt.CDMX],["🌇 GDL","#237A4A",cnt.GDL],["🏬 Santa Fe","#237A4A",cnt.SF],["📅 Sábados","#5C8A1E",cnt.SAT]].forEach(([t,bg,data])=>{
+    let h=`<div class="cc"><div class="cch" style="background:${bg}">${t}</div>`;
+    Object.entries(data).sort((a,b)=>b[1]-a[1]||a[0].localeCompare(b[0])).forEach(([p,n])=>{h+=`<div class="cr"><span>${p}</span><b class="cd">${n}</b></div>`;});
+    cg.insertAdjacentHTML("beforeend",h+`</div>`);
+  });
+}
+function showSec(id,btn){document.getElementById("main").style.display=id==="main"?"block":"none";document.getElementById("cw").style.display=id==="cw"?"block":"none";document.querySelectorAll(".bt").forEach(b=>b.classList.remove("active"));btn.classList.add("active");}
+init();
+</script>
+</body>
+</html>
